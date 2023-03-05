@@ -7,22 +7,24 @@ d = {}
 for i in table_products.columns:
     d[i] = 0
 
-a = input()
-while a != '0':
+product, weight = input().split()
+weight = int(weight)
+while product != '0':
     name = []
     num = []
-    for i in table_products.loc[a]:
-        num.append(i)
+    for i in table_products.loc[product]:
+        try:
+            num.append(int(i) / 100 * weight)
+        except ValueError:
+            num.append(0)
     for i in table_products.columns:
         name.append(i)
-    print(a)
+    print(product)
     for i in range(len(name)):
         print(f'{name[i]} = {num[i]}')
-        try:
-            d[name[i]] += num[int(i)]
-        except:
-            pass
-    a = input()
+        d[name[i]] += num[int(i)]
+    product, weight = input().split()
+    weight = int(weight)
 for k, v in d.items():
     print(k)
     print(v)
