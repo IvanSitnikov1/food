@@ -13,19 +13,17 @@ while True:
         weight = int(weight)
     except ValueError:
         break
-    name = []
-    num = []
-    for i in table_products.loc[product]:
+    df = {}
+    for column in table_products.columns:
         try:
-            num.append(int(i) / 100 * weight)
+            df[column] = int(table_products.loc[product, column]) / 100 * weight
+            d[column] += int(table_products.loc[product, column]) / 100 * weight
         except ValueError:
-            num.append(0)
-    for i in table_products.columns:
-        name.append(i)
+            df[column] = 0
     print(product)
-    for i in range(len(name)):
-        print(f'{name[i]} = {num[i]}')
-        d[name[i]] += num[int(i)]
+    for k,  v in df.items():
+        print(k, '=', v)
+
 for k, v in d.items():
     print(k)
     print(v)
