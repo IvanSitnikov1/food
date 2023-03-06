@@ -19,11 +19,13 @@ while True:
             d[column] += int(table_products.loc[product, column]) / 100 * weight
         except ValueError:
             df[column] = 0
-    print(product)
+    print('\n', product)
     for k,  v in df.items():
         print(k, '=', v)
 
+print('Итого:')
 for k, v in d.items():
     print(k)
     print(v)
 
+input()
