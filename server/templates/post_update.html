@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Обновление статьи
+{% endblock %}
+
+{% block  body %}
+<h1>Обновление статьи</h1>
+<form method="post">
+    <input type="text" name="title" id="title" value="{{ article.title}}" placeholder="Введите название"><br>
+    <textarea name="intro" id="intro" placeholder="Введите анонс">{{ article.intro}}</textarea><br>
+    <textarea name="text" id="text" placeholder="Введите основной текст">{{ article.text}}</textarea><br>
+    <input type="submit" value="Обновить">
+</form>
+{% endblock %}

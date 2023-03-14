@@ -7,12 +7,17 @@
 {% block  body %}
 <h1>Все статьи на сайте</h1>
 
-{% for el in articles %}
-<div>
-    <h2>{{ el.title }}</h2>
-    <p>{{ el.intro}}</p>
-    <p><b>Дата: {{ el.date.date() }}</b></p>
-    <button><a href="/posts/{{ el.id }}">Детальнее</a></button>
-</div>
-{% endfor %}
+{% if articles|length > 0 %}
+    {% for el in articles %}
+    <div>
+        <h2>{{ el.title }}</h2>
+        <p>{{ el.intro}}</p>
+        <p><b>Дата: {{ el.date.date() }}</b></p>
+        <button><a href="/posts/{{ el.id }}">Детальнее</a></button>
+    </div>
+    {% endfor %}
+{% else %}
+<p>На сайте пока нет статей</p>
+<a href="/create-article">Добавить свою статью</a>
+{% endif%}
 {% endblock %}
