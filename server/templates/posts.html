@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Все статьи на сайте
+{% endblock %}
+
+{% block  body %}
+<h1>Все статьи на сайте</h1>
+
+{% for el in articles %}
+<div>
+    <h2>{{ el.title }}</h2>
+    <p>{{ el.intro}}</p>
+    <p><b>Дата: {{ el.date.date() }}</b></p>
+    <button><a href="/posts/{{ el.id }}">Детальнее</a></button>
+</div>
+{% endfor %}
+{% endblock %}
