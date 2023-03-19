@@ -13,7 +13,7 @@
         <h2>{{ el.title }}</h2>
         <p>{{ el.intro}}</p>
         <p><b>Дата: {{ el.date.date() }}</b></p>
-        <button><a href="/posts/{{ el.id }}">Детальнее</a></button>
+        <a href="/posts/{{ el.id }}"><button class="btn-norm">Детальнее</button></a>
     </div>
     {% endfor %}
 {% else %}

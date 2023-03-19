@@ -9,8 +9,8 @@
 <div>
     <p>{{ article.text }}</p>
     <p><b>Дата: {{ article.date.date() }}</b></p>
-    <a href="/posts/{{ article.id }}/del"><button>Удалить</button></a>
-    <a href="/posts/{{ article.id }}/update"><button>Редактировать</button></a>
+    <a href="/posts/{{ article.id }}/del"><button class="btn-norm">Удалить</button></a>
+    <a href="/posts/{{ article.id }}/update"><button class="btn-norm">Редактировать</button></a>
 </div>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import sqlite3
 
 
 app = Flask(__name__)
@@ -8,6 +9,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 app.app_context().push()
+
+def create_product_base():
+    con = sqlite3.connect('./instance/product_base.db')
+    cursor = con.cursor()
+    cursor.execute('select * from product')
+    return cursor.fetchall()
 
 
 class Article(db.Model):
@@ -98,5 +105,27 @@ def create_article():
     else:
         return render_template('create-article.html')
 
+res_sum = [0, 0, 0, 0]
+@app.route('/calc')
+def calc():
+    global res_sum
+    res_sum = [0, 0, 0, 0]
+    products_base = create_product_base()
+    return render_template('calc.html', pb=products_base)
+
+
+@app.route('/calc/<int:id>', methods=['POST', 'GET'])
+def calc_product(id):
+    products_base = create_product_base()
+    res_weight = []
+    if request.method == 'POST':
+        weight = request.form['weight']
+        for i in range(2, 6):
+            res_weight.append(int(products_base[id][i]) / 100 * int(weight))
+        for i in range(4):
+            res_sum[i] += res_weight[i]
+    return render_template('calc_product.html', pb=products_base, pb_id=products_base[id], res_w=res_weight, res_s=res_sum)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5000, debug=True)

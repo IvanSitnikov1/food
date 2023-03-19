@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Калькулятор
+{% endblock %}
+
+{% block  body %}
+
+<h1>Калькулятор</h1>
+<h3>Продукт</h3>
+<select name="products" id="products" required="required">
+  <option >{{ pb_id[1] }}</option>
+  {% for el in pb %}
+  <option value="{{ el[0] }}">{{ el[1] }}</option>
+  {% endfor %}
+</select>
+<form method="post">
+  <input type="number" name="weight" id="weight" placeholder="Введите вес продукта"><br>
+  <input class="btn-norm" type="submit" value="Добавить">
+</form>
+
+<script>
+  const select = document.getElementById("products");
+  const weight = document.getElementById("weight");
+  select.addEventListener("change", () => {
+    const selectedValue = select.value;
+    window.location.href = selectedValue;
+    });
+  weight.addEventListener("change", () => {
+    window.location.reload()
+    });
+</script>
+{% if res_w %}
+<div class="string-block">
+  <h4 class="center">{{ pb_id[1] }}</h4>
+  <h5>Каллорийность - {{ res_w[0] }}</h5>
+  <h5>Белки - {{ res_w[1] }}</h5>
+  <h5>Жиры - {{ res_w[2] }}</h5>
+  <h5>Углеводы - {{ res_w[3] }}</h5>
+</div>
+{% else %}
+<div class="string-block">
+  <h4 class="center">{{ pb_id[1] }}</h4>
+  <h5>Каллорийность - {{ pb_id[2] }}</h5>
+  <h5>Белки - {{ pb_id[3] }}</h5>
+  <h5>Жиры - {{ pb_id[4] }}</h5>
+  <h5>Углеводы - {{ pb_id[5] }}</h5>
+</div>
+{% endif %}
+<div class="string-block">
+  <h4 class="center">Суммарно</h4>
+  <h5>Каллорийность - {{ res_s[0] }}</h5>
+  <h5>Белки - {{ res_s[1] }}</h5>
+  <h5>Жиры - {{ res_s[2] }}</h5>
+  <h5>Углеводы - {{ res_s[3] }}</h5>
+</div>
+{% endblock %}
