@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Калькулятор
+{% endblock %}
+
+{% block  body %}
+
+<h1>Калькулятор</h1>
+<h3>Продукт</h3>
+<select name="products" id="products" required="required">
+  <option >Выберите продукт</option>
+  {% for el in pb %}
+  <option value="{{ el[0] }}">{{ el[1] }}</option>
+  {% endfor %}
+</select>
+<form method="post">
+  <input type="number" name="weight" id="weight" placeholder="Введите вес продукта">
+</form>
+<script>
+  const select = document.getElementById("products");
+  select.addEventListener("change", () => {
+    const selectedValue = select.value;
+    window.location.href = 'calc/' + selectedValue;
+    });
+</script>
+{% endblock %}
